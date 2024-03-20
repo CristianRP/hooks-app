@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { SimpleForm } from './02-useEffect/SimpleForm'
 
 import './index.css'
+import { SimpleFormWithHook } from './02-useEffect/SimpleFormWithHook'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
-    <SimpleForm />
+    <SimpleFormWithHook />
   // </React.StrictMode>,
 )
