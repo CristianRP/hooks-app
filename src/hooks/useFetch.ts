@@ -14,6 +14,8 @@ type FetchResponse<T> = {
   }
 }
 
+const localCache: { [key: string]: DataType<unknown> } = {};
+
 export const useFetch = <T extends object>( url: string ): FetchResponse<T> => {
   const [state, setState] = useState({
     data: {},
@@ -25,10 +27,26 @@ export const useFetch = <T extends object>( url: string ): FetchResponse<T> => {
   useEffect(() => {
 
     const getFetch = async() => {
+
+      console.log(localCache);
+      
+      if (localCache[url]) {
+        console.log('using-cache');
+        setState({
+          data: localCache[url] as DataType<T>,
+          isLoading: false,
+          hasError: false,
+          error: {}
+        });
+        return;
+      }
+
+      setLoadingState();
+
       const resp = await fetch(url);
 
 
-      console.log('parent-resp', resp);
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       if ( !resp.ok ) {
         setState({
@@ -44,8 +62,6 @@ export const useFetch = <T extends object>( url: string ): FetchResponse<T> => {
       }
 
       const data = await resp.json();
-      console.log(data);
-      
 
       setState({
         data,
@@ -53,10 +69,21 @@ export const useFetch = <T extends object>( url: string ): FetchResponse<T> => {
         hasError: false,
         error: {}
       });
+
+      localCache[url] = data as DataType<T>;
     }
 
     getFetch();
   }, [url]);
+
+  const setLoadingState = () => {
+    setState({
+      data: {},
+      isLoading: true,
+      hasError: false,
+      error: {}
+    });
+  }
 
   return {
     data: state.data as DataType<T>,
