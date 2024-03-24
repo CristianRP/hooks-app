@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import { Parent } from './07-task-memo/Parent'
+import { TodoApp } from './08-useReducer/TodoApp'
 
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
-  <Parent /> 
+  <TodoApp />
   // </React.StrictMode>,
 )
