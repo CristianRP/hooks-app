@@ -1,51 +1,10 @@
-import { useEffect, useReducer } from 'react'
-import { Action, todoReducer } from './todoReducer';
-import { Todo, TodoList } from './TodoList';
+import { TodoList } from './TodoList';
 import { TodoAddForm } from './TodoAddForm';
-
-const initialState: Todo[] = []
-
-type DispatchAction = (action: Action) => void;
-
-const init = () => {
-  return JSON.parse( localStorage.getItem('todos')! ) || [];
-}
+import { useTodo } from '../hooks/useTodo';
 
 export const TodoApp = () => {
 
-  const [ todos, dispatch ]:[ Todo[], DispatchAction ] = useReducer( todoReducer , initialState, init );
-
-  const handlerTodo = (newTodo: Todo) => {
-    const action = {
-      type: '[TODO] Add Todo',
-      payload: newTodo
-    }
-
-    dispatch(action);
-  }
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos || []));
-  },[todos]);
-
-  const handleDeleteTodo = ( id:string ) => {
-    console.log(id);
-    dispatch({
-      type: '[TODO] Remove Todo',
-      payload: {
-        id
-      }
-    })
-  }
-
-  const handleToggleTodo = ( id:string ) => {
-    dispatch({
-      type: '[TODO] Update Done Todo',
-      payload: {
-        id,
-      }
-    })
-  }
+  const { todos, handleNewTodo, handleDeleteTodo, handleToggleTodo } = useTodo();
 
   return (
     <div className='flex flex-col'>
@@ -60,7 +19,7 @@ export const TodoApp = () => {
         <div className='ml-2'>
           <h4>Add TODO</h4>
           <hr />
-          <TodoAddForm onNewTodo={ handlerTodo } />
+          <TodoAddForm onNewTodo={ handleNewTodo } />
         </div>
       </div>
 
