@@ -4,11 +4,11 @@ import { useTodo } from '../hooks/useTodo';
 
 export const TodoApp = () => {
 
-  const { todos, handleNewTodo, handleDeleteTodo, handleToggleTodo } = useTodo();
+  const { todos, todosCount, pendingTodosCount, handleNewTodo, handleDeleteTodo, handleToggleTodo } = useTodo();
 
   return (
     <div className='flex flex-col'>
-      <h1 className='text-3xl font-bold mb-2'>TodoAPP (10), <small>Pending: 2</small></h1>
+      <h1 className='text-3xl font-bold mb-2'>TodoAPP ({ todosCount }), <small>Pending: { pendingTodosCount }</small></h1>
       <hr />
 
       <div className='flex justify-between p-4'>
