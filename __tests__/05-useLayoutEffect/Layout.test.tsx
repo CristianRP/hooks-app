@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
 import { Layout } from '../../src/05-useLayoutEffect/Layout';
 import { useFetch } from '../../src/hooks';
