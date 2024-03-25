@@ -29,6 +29,7 @@ export const Layout = () => {
       <button
         className='m-2 p-2 bg-green-800 rounded-md text-white active:bg-green-700 hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-500'
         onClick={ () => setReload(!reload) }
+        disabled={ isLoading }
         >
         Next Quote
       </button>
