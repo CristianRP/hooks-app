@@ -10,7 +10,7 @@ export const TodoItem = ({ todo, onDeleteTodo, onToggleTodo }: TodoItemProps) =>
   return (
     <li className='flex justify-between border border-gray-500 p-2'>
       <div className='flex w-full justify-between' onClick={ () => onToggleTodo( todo.id ) }>
-        <span className={`self-center w-3/5 ${ todo.done ? 'line-through' : '' }`}>{ todo.description }</span>
+        <span className={`self-center w-3/5 ${ todo.done ? 'line-through' : '' }`} aria-label='span'>{ todo.description }</span>
         <span className='self-center'>{ JSON.stringify(todo.done) }</span>
       </div>
       <button
