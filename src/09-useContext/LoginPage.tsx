@@ -12,7 +12,7 @@ export const LoginPage = () => {
     <>
       <h1>LoginPage</h1>
       <hr />
-      <pre>{ JSON.stringify(user, null, 3) }</pre>
+      <pre aria-label='pre'>{ JSON.stringify(user, null, 3) }</pre>
 
       <button
         className='bg-blue-500 rounded-md p-2 text-white mt-2'
